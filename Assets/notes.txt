@@ -1,0 +1,6 @@
+// editor note
+
+// color
+back = 489CE5
+white text = fbfbfb
+yellow text = EFEF34

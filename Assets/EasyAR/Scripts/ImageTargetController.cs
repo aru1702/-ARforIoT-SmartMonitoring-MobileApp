@@ -8,10 +8,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+using UnityEngine.UI;
+using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
+using Models;
+using Proyecto26;
+
 using easyar;
 using System.Runtime.InteropServices;
 public class ImageTargetController : MonoBehaviour
 {
+
+    public Button backButton, scanQrButton;
+    private int restartTime;
 
     public enum TargetType
     {
@@ -33,7 +43,7 @@ public class ImageTargetController : MonoBehaviour
 
     private bool xFlip = false;
 
-    private Image targetImage;
+    private easyar.Image targetImage;
 
     public Target Target()
     {
@@ -62,8 +72,24 @@ public class ImageTargetController : MonoBehaviour
         TargetSize = imageTarget.scale();
     }
 
+    private void backButtonClick () {
+        SceneManager.LoadScene(2);
+        Debug.Log("Back to Main menu");
+    }
+
+    private void scanQrButtonClick () {
+        Debug.Log("Go to Scan QR");
+    }
+
     private void Start()
     {
+
+// my code
+        backButton.onClick.AddListener(backButtonClick);
+        scanQrButton.onClick.AddListener(scanQrButtonClick);
+        restartTime = 0;
+
+// dev code
         for (int i = 0; i < transform.childCount; i++)
         {
             transform.GetChild(i).gameObject.SetActive(false);
@@ -90,14 +116,14 @@ public class ImageTargetController : MonoBehaviour
         WWW www;
         if (type == PathType.Absolute)
         {
-            path = Utility.AddFileHeader(path);
+            path = easyar.Utility.AddFileHeader(path);
 #if UNITY_ANDROID && !UNITY_EDITOR
             path = "file://" +  path;
 #endif
         }
         else if (type == PathType.StreamingAssets)
         {
-            path = Utility.AddFileHeader(Application.streamingAssetsPath + "/" + path);
+            path = easyar.Utility.AddFileHeader(Application.streamingAssetsPath + "/" + path);
         }
         Debug.Log("[EasyAR]:" + path);
         www = new WWW(path);
@@ -182,10 +208,64 @@ public class ImageTargetController : MonoBehaviour
         xFlip = !xFlip;
     }
 
+    private void SetIoTData () {
+        // initialize textmesh
+        TextMesh device_name = GameObject.Find("device_name").GetComponent<TextMesh>();
+        TextMesh sensor_details = GameObject.Find("sensor_details").GetComponent<TextMesh>();
+
+        // still use static Id
+        string deviceId = "rR64KRSbb2Zn4fswlxk4";
+
+        // url for RestClient API
+        string getDeviceDetailUrl = "https://myionic-c4817.firebaseapp.com/api/v1/Device/GetDevice/" + deviceId;
+        string getAllSensorDataUrl = "https://myionic-c4817.firebaseapp.com/api/v1/Data/GetAll/" + deviceId;
+
+        // get device details
+        RestClient.Get(getDeviceDetailUrl).Then (res => {
+            string result = res.Text;
+            GetDeviceDetailsModel resultJson = JsonUtility.FromJson<GetDeviceDetailsModel>(result);
+
+            if (resultJson.code == 200) {
+                device_name.text = resultJson.result.name;
+            }
+        });
+
+        // get all data
+        RestClient.Get(getAllSensorDataUrl).Then (res => {
+            string result = res.Text;
+            GetAllDataModel resultJson = JsonUtility.FromJson<GetAllDataModel>(result);
+
+            if (resultJson.code == 200) {             
+                string resultData = "";
+
+                for (int i = 0 ; i < resultJson.result.Length ; i++) {
+                    string sensorName = resultJson.result[i].name;
+                    string sensorValue = resultJson.result[i].value;
+
+                    resultData += sensorName + ": "	 + sensorValue + "\n";
+                }
+
+                sensor_details.text = resultData;
+            }
+        });
+    }
+
     public void OnTracking(Matrix4x4 pose)
     {
+
+// my code
+        
+        if (restartTime > 0) {
+            restartTime--;
+            Debug.Log(restartTime);
+        } else {
+            restartTime = 24;
+            SetIoTData();
+        }
+
+// dev code
         Debug.Log("[EasyAR] OnTracking targtet name: " + target.name());
-        Utility.SetMatrixOnTransform(transform, pose);
+        easyar.Utility.SetMatrixOnTransform(transform, pose);
         if (xFlip)
         {
             var scale = transform.localScale;

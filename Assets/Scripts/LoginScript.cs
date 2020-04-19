@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
@@ -14,6 +16,8 @@ public class LoginScript : MonoBehaviour
     public InputField email;
     public InputField pass;
     public Button login;
+	public GameObject loadingPanel, alertPanel;
+	public Text errorText;
 
     private RequestHelper currentRequest;
 
@@ -30,6 +34,8 @@ public class LoginScript : MonoBehaviour
 	}
 
     public void buttonClick () {
+		loadingPanel.SetActive(true);
+
         string emailV = email.text;
         string passV = pass.text;
 
@@ -59,10 +65,46 @@ public class LoginScript : MonoBehaviour
 			// this.LogMessage("Success", JsonUtility.ToJson(res, true));
             // Debug.Log(res.result);
 
+			// success
 			if (res.code == 200) {
-				SceneManager.LoadScene(2);
+
+				// get user ID
+				string userGetIdUrl = "https://myionic-c4817.firebaseapp.com/api/v1/User/GetId/" + emailV;
+				RestClient.Get(userGetIdUrl).Then(res2 => {
+					string getResult = res2.Text;
+					GetUserIdModel itemUserId = JsonUtility.FromJson<GetUserIdModel>(getResult);
+
+					if (itemUserId.code != 200) {
+						
+						// failed
+						loadingPanel.SetActive(false);
+						alertPanel.SetActive(true);
+						errorText.text = "Failed to get your data, please try again!";
+						return;
+
+					} else {
+						
+						// success
+						PlayerPrefs.SetString("user__email_address", emailV);
+						PlayerPrefs.SetString("user__id", itemUserId.result.id);
+
+						loadingPanel.SetActive(false);
+						SceneManager.LoadScene(2);
+						
+					}
+				});
+			} else {
+				loadingPanel.SetActive(false);
+				alertPanel.SetActive(true);
+				errorText.text = "Incorrect email address or password!";
 			}
 
-		}).Catch(err => this.LogMessage("Error", err.Message));
+		}).Catch(err => {
+			loadingPanel.SetActive(false);
+			alertPanel.SetActive(true);
+			errorText.text = "Failed to authenticate your account, check your internet connection and please try again!";
+
+			this.LogMessage("Error", err.Message);
+		});
     }
 }

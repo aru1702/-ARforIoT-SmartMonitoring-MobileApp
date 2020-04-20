@@ -7,6 +7,7 @@
 //================================================================================================================================
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 namespace easyar
 {
     [RequireComponent(typeof(Camera))]
@@ -24,6 +25,9 @@ namespace easyar
             Left,
             Right
         }
+
+        // add
+        public Button scanButton;
 
         private CommandBuffer commandBuffer;
         private ARMaterial arMat;
@@ -94,6 +98,17 @@ namespace easyar
             arMat = new ARMaterial();
         }
 
+        void Start()
+        {
+            scanButton.onClick.AddListener(GoScan);
+        }
+
+        void GoScan () {
+            // Debug.Log("enter go scan");
+            // this.OnDestroy();
+            // Debug.Log("go go go");
+        }
+
 
         private void UpdateRender(easyar.Image image)
         {
@@ -150,6 +165,7 @@ namespace easyar
 
         private void OnDestroy()
         {
+            Debug.Log("destroy");
             if (commandBuffer != null)
             {
                 targetCamera.RemoveCommandBuffer(CameraEvent.BeforeForwardOpaque, commandBuffer);

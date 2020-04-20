@@ -15,6 +15,9 @@ using UnityEngine.SceneManagement;
 using Models;
 using Proyecto26;
 
+using System;
+using System.Threading.Tasks;
+
 using easyar;
 using System.Runtime.InteropServices;
 public class ImageTargetController : MonoBehaviour
@@ -22,7 +25,7 @@ public class ImageTargetController : MonoBehaviour
 
     public Button backButton, scanQrButton;
     private int restartTime;
-    private TextMesh device_name, sensor_details;
+    private TextMesh device_name, sensor_details, device_lastupdate;
 
     public enum TargetType
     {
@@ -79,9 +82,15 @@ public class ImageTargetController : MonoBehaviour
         Debug.Log("Back to Main menu");
     }
 
-    private void scanQrButtonClick () {
+    async private void scanQrButtonClick () {
         Debug.Log("Go to Scan QR");
-        this.OnDestroy();
+        // var objects = GameObject.FindObjectsOfType(GameObject);
+        // foreach (GameObject o in objects) {
+        //     Destroy(o.gameObject);
+        // }
+        await Task.Delay(TimeSpan.FromSeconds(0.5));
+        SceneManager.LoadScene(4);
+        await Task.Delay(TimeSpan.FromSeconds(0.5));
         SceneManager.LoadScene(4);
     }
 
@@ -94,6 +103,7 @@ public class ImageTargetController : MonoBehaviour
         restartTime = 0;
         device_name = GameObject.Find("device_name").GetComponent<TextMesh>();
         sensor_details = GameObject.Find("sensor_details").GetComponent<TextMesh>();
+        device_lastupdate = GameObject.Find("device_lastupdate").GetComponent<TextMesh>();
 
 // dev code
         for (int i = 0; i < transform.childCount; i++)
@@ -230,6 +240,7 @@ public class ImageTargetController : MonoBehaviour
 
             if (resultJson.code == 200) {
                 device_name.text = resultJson.result.name;
+                device_lastupdate.text = resultJson.result.last_update;
             }
         });
 
@@ -282,6 +293,7 @@ public class ImageTargetController : MonoBehaviour
     {
 // my code 
         device_name.text = "No device name";
+        device_lastupdate.text = "";
         sensor_details.text = "No data";
 
 // dev code

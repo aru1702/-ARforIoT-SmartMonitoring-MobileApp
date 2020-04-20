@@ -100,7 +100,7 @@ public class ImageTargetController : MonoBehaviour
 // my code
         backButton.onClick.AddListener(backButtonClick);
         scanQrButton.onClick.AddListener(scanQrButtonClick);
-        restartTime = 0;
+        restartTime = 50;
         device_name = GameObject.Find("device_name").GetComponent<TextMesh>();
         sensor_details = GameObject.Find("sensor_details").GetComponent<TextMesh>();
         device_lastupdate = GameObject.Find("device_lastupdate").GetComponent<TextMesh>();
@@ -225,8 +225,10 @@ public class ImageTargetController : MonoBehaviour
     }
 
     private void SetIoTData () {
-        // try to get device id from pref
+
         // string deviceId = "rR64KRSbb2Zn4fswlxk4";
+
+        // try to get data from pref        
         string deviceId = PlayerPrefs.GetString("device__id");
 
         // url for RestClient API
@@ -264,29 +266,60 @@ public class ImageTargetController : MonoBehaviour
         });
     }
 
+    private void OnEnable() {
+        string appTimeRecord = PlayerPrefs.GetString("app__time_record");
+
+        if (appTimeRecord == "True") {
+            PlayerPrefs.SetString("app__go_time_record", "False");
+        } else {
+            PlayerPrefs.SetString("app__go_time_record", "True");
+        }
+
+        Debug.Log(appTimeRecord);
+
+        string goTimeRecord = PlayerPrefs.GetString("app__go_time_record");
+        Debug.Log(goTimeRecord);
+    }
+
     public void OnTracking(Matrix4x4 pose)
     {
+        string appTimeRecord = PlayerPrefs.GetString("app__time_record");
+        string goTimeRecord = PlayerPrefs.GetString("app__go_time_record");
+        string endTimeRecord = PlayerPrefs.GetString("app__end_time_record");
+
+        // Debug.Log(goTimeRecord + " " + endTimeRecord);
 
 // my code
-        if (restartTime > 0) {
-            restartTime--;
-            Debug.Log(restartTime);
-        } else {
-            restartTime = 24;
-            SetIoTData();
+            
+        if (appTimeRecord == "True" && goTimeRecord == "True") {
+            this.OnFound();
+            PlayerPrefs.SetString("app__go_time_record", "False");
+            PlayerPrefs.SetString("app__end_time_record", "True");
+            PlayerPrefs.SetString("app__time_record", "False");
         }
 
 // dev code
-        Debug.Log("[EasyAR] OnTracking targtet name: " + target.name());
-        easyar.Utility.SetMatrixOnTransform(transform, pose);
-        if (xFlip)
-        {
-            var scale = transform.localScale;
-            scale.x = -scale.x;
-            transform.localScale = scale;
-        }
+        if (goTimeRecord == "True" || endTimeRecord == "True") {
 
-        transform.localScale = transform.localScale * TargetSize;
+            if (restartTime > 0) {
+                restartTime--;
+                // Debug.Log(restartTime);
+            } else {
+                restartTime = 50;
+                SetIoTData();
+            }
+
+            Debug.Log("[EasyAR] OnTracking targtet name: " + target.name());
+            easyar.Utility.SetMatrixOnTransform(transform, pose);
+            if (xFlip)
+            {
+                var scale = transform.localScale;
+                scale.x = -scale.x;
+                transform.localScale = scale;
+            }
+
+            transform.localScale = transform.localScale * TargetSize;
+        }
     }
 
     public void OnLost()
@@ -308,20 +341,30 @@ public class ImageTargetController : MonoBehaviour
     public void OnFound()
     {
 // my code 
-        device_name.text = "";
-        sensor_details.text = "Please wait ...";
+        string goTimeRecord = PlayerPrefs.GetString("app__go_time_record");
+        string endTimeRecord = PlayerPrefs.GetString("app__end_time_record");
+
+        if (goTimeRecord == "True" || endTimeRecord == "True") {
+            device_name.text = "";
+            sensor_details.text = "Please wait ...";
 
 // dev code
-        Debug.Log("[EasyAR] OnFound targtet name: " + target.name());
-        gameObject.SetActive(true);
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            transform.GetChild(i).gameObject.SetActive(true);
+            Debug.Log("[EasyAR] OnFound targtet name: " + target.name());
+            gameObject.SetActive(true);
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                transform.GetChild(i).gameObject.SetActive(true);
+            }
         }
     }
 
     private void OnDestroy()
     {
+// my code
+        PlayerPrefs.SetString("app__end_time_record", "False");
+        PlayerPrefs.SetString("app__go_time_record", "False");
+
+// dev code
         if (ImageTracker != null)
             ImageTracker.UnloadImageTarget(this, (target, status) => { Debug.Log("[EasyAR] Targtet name: " + target.name() + " Target runtimeID: " + target.runtimeID() + " load status: " + status); });
     }

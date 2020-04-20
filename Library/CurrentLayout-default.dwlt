@@ -395,20 +395,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/EasyAR/Scripts
+    - Assets/Scenes
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/EasyAR/Scripts
+  - Assets/Scenes
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\MAldyB\UnityProject\SmartAR-IoT
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 191}
-    m_SelectedIDs: be300000
-    m_LastClickedID: 12478
-    m_ExpandedIDs: 00000000542d0000642d0000ec2d0000862e00001a2f0000bc2f0000be300000ea300000f230000000ca9a3b
+    scrollPos: {x: 0, y: 160}
+    m_SelectedIDs: c6300000
+    m_LastClickedID: 12486
+    m_ExpandedIDs: 00000000542d0000642d0000ec2d00001a2f0000bc2f0000be300000ea300000f230000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -461,24 +461,24 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 7a460000
-    m_LastClickedInstanceID: 18042
+    m_SelectedInstanceIDs: a22d0000
+    m_LastClickedInstanceID: 11682
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300003c3b0000463b00004e3b00002a3b0000263b0000283b00002c3b00000000000066360000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Main
+      m_OriginalName: Main
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 11682
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 5}
     m_CreateAssetUtility:
@@ -488,7 +488,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 64}
+    m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 16
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 229
@@ -561,7 +561,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: f4f5ffffd2f8ffff76fbffff60460000a4460000
+      m_ExpandedIDs: 4ca1ffff6ea1ffffecbfffff92ecffff00edffff3eedffff84edffffbaedffffecedffff46effffffef8ffff02f9ffff3cf9ffff70f9ffff44faffffaefaffffeafaffff76fbffff7c34000086350000a6370000b0380000de5a0000e85a0000c85e0000fc5f000088600000b2600000d26000000ac400008ec40000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -621,9 +621,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 283.8188, y: 370.1753, z: -117.875}
+    m_Target: {x: 347.0152, y: 560.14154, z: -296.91025}
     speed: 2
-    m_Value: {x: 283.8188, y: 370.1753, z: -117.875}
+    m_Value: {x: 347.0152, y: 560.14154, z: -296.91025}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -656,9 +656,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 1027.0035
+    m_Target: 613.4029
     speed: 2
-    m_Value: 1027.0035
+    m_Value: 613.4029
   m_Ortho:
     m_Target: 1
     speed: 2

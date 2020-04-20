@@ -14,11 +14,20 @@ public class MainMenuScript : MonoBehaviour
     public Toggle timeRecord;
     public Button toMonitoring, toProfile, toQuit, logoutButton;
     public Button yesLogout, noLogout;
-    public Text userName, userEmail, user_Id;
-    public GameObject loadingPanel, alertPanel;
+    public Text userName, userEmail, user_Id, alertText;
+    public GameObject loadingPanel, logoutPanel, alertPanel;
     private RequestHelper currentRequest;
 
     private bool timeRecordV = false;
+
+    private void OnEnable() {
+        // Debug.Log(PlayerPrefs.GetString("app__time_record"));
+        if (PlayerPrefs.GetString("app__time_record") == "True") {
+            timeRecord.GetComponent<Toggle>().isOn = true;
+        } else {
+            timeRecord.GetComponent<Toggle>().isOn = false;
+        }
+    }
 
     void Start () 
     {
@@ -71,15 +80,15 @@ public class MainMenuScript : MonoBehaviour
     }
 
     private void ConfirmLogoutButton () {
-        alertPanel.SetActive(true);
+        logoutPanel.SetActive(true);
     }
 
     private void GoLogoutNo () {
-        alertPanel.SetActive(false);
+        logoutPanel.SetActive(false);
     }
 
     private void GoLogoutYes () {
-        alertPanel.SetActive(false);
+        logoutPanel.SetActive(false);
         loadingPanel.SetActive(true);
 
         string userId = PlayerPrefs.GetString("user__id");
@@ -97,14 +106,24 @@ public class MainMenuScript : MonoBehaviour
         RestClient.Post<LoginModelRes>(currentRequest).Then(res => {
 
             if (res.code == 200) {
+                // remove all data
+                PlayerPrefs.SetString("user__id", "");
+                PlayerPrefs.SetString("user__email_address", "");
+                PlayerPrefs.SetString("app__time_record", "");
+                PlayerPrefs.SetString("device__id", "");
+
                 loadingPanel.SetActive(false);
                 SceneManager.LoadScene(1);
             } else {
                 loadingPanel.SetActive(false);
+                alertPanel.SetActive(true);
+                alertText.text = "Error while performing logout, check your connection and please try again!";
             }
 
         }).Catch(err => {
             loadingPanel.SetActive(false);
+            alertPanel.SetActive(true);
+            alertText.text = "Error while performing logout, check your connection and please try again!";
         });
     }
     

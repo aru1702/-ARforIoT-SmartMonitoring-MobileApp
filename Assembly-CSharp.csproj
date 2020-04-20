@@ -91,6 +91,8 @@
      <Compile Include="Assets\Samples\Simple\SimpleDemo.cs" />
      <Compile Include="Assets\Scripts\alertPanelScript.cs" />
      <Compile Include="Assets\Scripts\animationLoading.cs" />
+     <Compile Include="Assets\Scripts\countdownPanelScript.cs" />
+     <Compile Include="Assets\Scripts\EasyArImageTargetScript.cs" />
      <Compile Include="Assets\Scripts\External\WizUtils\Logger\Log.cs" />
      <Compile Include="Assets\Scripts\External\WizUtils\Logger\LogLevel.cs" />
      <Compile Include="Assets\Scripts\External\WizUtils\Logger\Services\ConsoleService.cs" />

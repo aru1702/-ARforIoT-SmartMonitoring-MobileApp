@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Main.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/MonitoringImageTarget.unity
-    guid: 74fe2a674fa40b44daa8fdbf00278fcf
+    path: Assets/Scenes/EasyArImageTarget.unity
+    guid: 791821feb09094446869e60bba6d242e
+  - enabled: 1
+    path: Assets/Scenes/ScanQrCode.unity
+    guid: 17fb6a30811385c4f8bb6669e44f8df6
   m_configObjects: {}

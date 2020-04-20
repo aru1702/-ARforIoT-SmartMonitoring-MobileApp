@@ -22,6 +22,7 @@ public class ImageTargetController : MonoBehaviour
 
     public Button backButton, scanQrButton;
     private int restartTime;
+    private TextMesh device_name, sensor_details;
 
     public enum TargetType
     {
@@ -74,11 +75,14 @@ public class ImageTargetController : MonoBehaviour
 
     private void backButtonClick () {
         SceneManager.LoadScene(2);
+        this.OnDestroy();
         Debug.Log("Back to Main menu");
     }
 
     private void scanQrButtonClick () {
         Debug.Log("Go to Scan QR");
+        this.OnDestroy();
+        SceneManager.LoadScene(4);
     }
 
     private void Start()
@@ -88,6 +92,8 @@ public class ImageTargetController : MonoBehaviour
         backButton.onClick.AddListener(backButtonClick);
         scanQrButton.onClick.AddListener(scanQrButtonClick);
         restartTime = 0;
+        device_name = GameObject.Find("device_name").GetComponent<TextMesh>();
+        sensor_details = GameObject.Find("sensor_details").GetComponent<TextMesh>();
 
 // dev code
         for (int i = 0; i < transform.childCount; i++)
@@ -209,12 +215,9 @@ public class ImageTargetController : MonoBehaviour
     }
 
     private void SetIoTData () {
-        // initialize textmesh
-        TextMesh device_name = GameObject.Find("device_name").GetComponent<TextMesh>();
-        TextMesh sensor_details = GameObject.Find("sensor_details").GetComponent<TextMesh>();
-
-        // still use static Id
-        string deviceId = "rR64KRSbb2Zn4fswlxk4";
+        // try to get device id from pref
+        // string deviceId = "rR64KRSbb2Zn4fswlxk4";
+        string deviceId = PlayerPrefs.GetString("device__id");
 
         // url for RestClient API
         string getDeviceDetailUrl = "https://myionic-c4817.firebaseapp.com/api/v1/Device/GetDevice/" + deviceId;
@@ -254,7 +257,6 @@ public class ImageTargetController : MonoBehaviour
     {
 
 // my code
-        
         if (restartTime > 0) {
             restartTime--;
             Debug.Log(restartTime);
@@ -278,6 +280,11 @@ public class ImageTargetController : MonoBehaviour
 
     public void OnLost()
     {
+// my code 
+        device_name.text = "No device name";
+        sensor_details.text = "No data";
+
+// dev code
         Debug.Log("[EasyAR] OnLost targtet name: " + target.name());
         gameObject.SetActive(false);
         for (int i = 0; i < transform.childCount; i++)
@@ -288,6 +295,11 @@ public class ImageTargetController : MonoBehaviour
 
     public void OnFound()
     {
+// my code 
+        device_name.text = "";
+        sensor_details.text = "Please wait ...";
+
+// dev code
         Debug.Log("[EasyAR] OnFound targtet name: " + target.name());
         gameObject.SetActive(true);
         for (int i = 0; i < transform.childCount; i++)

@@ -88,10 +88,14 @@ public class ImageTargetController : MonoBehaviour
         // foreach (GameObject o in objects) {
         //     Destroy(o.gameObject);
         // }
-        await Task.Delay(TimeSpan.FromSeconds(0.5));
-        SceneManager.LoadScene(4);
-        await Task.Delay(TimeSpan.FromSeconds(0.5));
-        SceneManager.LoadScene(4);
+
+        // await Task.Delay(TimeSpan.FromSeconds(0.5));
+        // SceneManager.LoadScene(4);
+        // await Task.Delay(TimeSpan.FromSeconds(0.5));
+        // SceneManager.LoadScene(4);
+
+        PlayerPrefs.SetInt("app__scene_number", 4);
+        SceneManager.LoadScene(5);
     }
 
     private void Start()

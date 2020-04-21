@@ -109,7 +109,7 @@ public class MainMenuScript : MonoBehaviour
                 // remove all data
                 PlayerPrefs.SetString("user__id", "");
                 PlayerPrefs.SetString("user__email_address", "");
-                PlayerPrefs.SetString("app__time_record", "");
+                PlayerPrefs.SetString("app__time_record", "False");
                 PlayerPrefs.SetString("device__id", "");
 
                 loadingPanel.SetActive(false);

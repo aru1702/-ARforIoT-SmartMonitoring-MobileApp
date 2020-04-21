@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ScanQrCode.unity
     guid: 17fb6a30811385c4f8bb6669e44f8df6
+  - enabled: 1
+    path: Assets/Scenes/TransitionScene.unity
+    guid: f1a4a56f934bcd24aa03ee260038954a
   m_configObjects: {}

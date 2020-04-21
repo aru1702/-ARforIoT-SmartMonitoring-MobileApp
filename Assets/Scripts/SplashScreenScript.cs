@@ -11,12 +11,27 @@ public class SplashScreenScript : MonoBehaviour
     async void Start()
     {
         await Task.Delay(TimeSpan.FromSeconds(2));
-        SceneManager.LoadScene(1);
+        bool checkuser = checkUser();
+        
+        if (checkuser == true) {
+            SceneManager.LoadScene(2);
+        } else {
+            SceneManager.LoadScene(1);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private bool checkUser () {
+        string a = PlayerPrefs.GetString("user__id");
+        if (a.Length > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

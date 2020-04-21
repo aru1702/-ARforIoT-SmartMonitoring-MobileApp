@@ -87,6 +87,8 @@ public class LoginScript : MonoBehaviour
 						// success
 						PlayerPrefs.SetString("user__email_address", emailV);
 						PlayerPrefs.SetString("user__id", itemUserId.result.id);
+						PlayerPrefs.SetString("app__time_record", "False");
+                		PlayerPrefs.SetString("device__id", "");
 
 						loadingPanel.SetActive(false);
 						SceneManager.LoadScene(2);

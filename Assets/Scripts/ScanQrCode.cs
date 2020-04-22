@@ -80,7 +80,7 @@ public class ScanQrCode : MonoBehaviour {
 				GetDeviceDetailsModel2 deviceDetail = JsonUtility.FromJson<GetDeviceDetailsModel2>(result);
 
 				if (deviceDetail.code != 200) {
-					TextHeader.text = "Device not found or no sensor is listed!";
+					TextHeader.text = "Device is not found!";
 				} else if (deviceDetail.result.id_user != userId) {
 					TextHeader.text = "No authorization to access device!";
 				} else {

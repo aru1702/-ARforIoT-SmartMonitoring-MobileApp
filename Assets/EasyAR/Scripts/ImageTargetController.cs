@@ -240,32 +240,52 @@ public class ImageTargetController : MonoBehaviour
         string getAllSensorDataUrl = "https://myionic-c4817.firebaseapp.com/api/v1/Data/GetAll/" + deviceId;
 
         // get device details
-        RestClient.Get(getDeviceDetailUrl).Then (res => {
+        RestClient.Get(getDeviceDetailUrl).Then(res => {
             string result = res.Text;
             GetDeviceDetailsModel resultJson = JsonUtility.FromJson<GetDeviceDetailsModel>(result);
 
             if (resultJson.code == 200) {
                 device_name.text = resultJson.result.name;
                 device_lastupdate.text = resultJson.result.last_update;
+            } else if (device_name.text.Length > 0 || device_lastupdate.text.Length > 0) {
+                // do nothing
+                // because data already set but the server maybe hang up
+                // so don't display as an error
+            } else {
+                // literally error or no device found
+                device_name.text = "No device name";
+                device_lastupdate.text = "";
             }
         });
 
         // get all data
-        RestClient.Get(getAllSensorDataUrl).Then (res => {
+        RestClient.Get(getAllSensorDataUrl).Then(res => {
             string result = res.Text;
             GetAllDataModel resultJson = JsonUtility.FromJson<GetAllDataModel>(result);
 
-            if (resultJson.code == 200) {             
-                string resultData = "";
+            if (resultJson.code == 200) {   
 
-                for (int i = 0 ; i < resultJson.result.Length ; i++) {
-                    string sensorName = resultJson.result[i].name;
-                    string sensorValue = resultJson.result[i].value;
+                if (resultJson.result.Length > 0) {                    
+                    string resultData = "";          
 
-                    resultData += sensorName + ": "	 + sensorValue + "\n";
+                    for (int i = 0 ; i < resultJson.result.Length ; i++) {
+                        string sensorName = resultJson.result[i].name;
+                        string sensorValue = resultJson.result[i].value;
+
+                        resultData += sensorName + ": "	 + sensorValue + "\n";
+                    }
+
+                    sensor_details.text = resultData;
+                } else {
+                    sensor_details.text = "No sensor listed in this device";
                 }
-
-                sensor_details.text = resultData;
+            } else if (resultJson.code == 404) {
+                sensor_details.text = "No sensor listed in this device";
+            } else if (sensor_details.text.Length > 0) {
+                // do nothing
+                // do not update the text just because error in the middle
+            } else {
+                sensor_details.text = "Error while getting data from server";
             }
         });
     }
@@ -313,7 +333,7 @@ public class ImageTargetController : MonoBehaviour
                 SetIoTData();
             }
 
-            Debug.Log("[EasyAR] OnTracking targtet name: " + target.name());
+            // Debug.Log("[EasyAR] OnTracking targtet name: " + target.name());
             easyar.Utility.SetMatrixOnTransform(transform, pose);
             if (xFlip)
             {

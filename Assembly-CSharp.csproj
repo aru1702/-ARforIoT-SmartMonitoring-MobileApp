@@ -110,6 +110,7 @@
      <Compile Include="Assets\Scripts\Models\LoginModel.cs" />
      <Compile Include="Assets\Scripts\Models\LoginModelRes.cs" />
      <Compile Include="Assets\Scripts\Models\LogoutPostModel.cs" />
+     <Compile Include="Assets\Scripts\Multi-dimen Script\MDLoginScript.cs" />
      <Compile Include="Assets\Scripts\Parser\ParserResult.cs" />
      <Compile Include="Assets\Scripts\Parser\ZXingParser.cs" />
      <Compile Include="Assets\Scripts\Scanner\Scanner.cs" />

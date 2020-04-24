@@ -26,6 +26,7 @@ public class ImageTargetController : MonoBehaviour
     public Button backButton, scanQrButton;
     private int restartTime;
     private TextMesh device_name, sensor_details, device_lastupdate;
+    private bool readyGetNewData;
 
     public enum TargetType
     {
@@ -108,6 +109,7 @@ public class ImageTargetController : MonoBehaviour
         device_name = GameObject.Find("device_name").GetComponent<TextMesh>();
         sensor_details = GameObject.Find("sensor_details").GetComponent<TextMesh>();
         device_lastupdate = GameObject.Find("device_lastupdate").GetComponent<TextMesh>();
+        readyGetNewData = true;
 
 // dev code
         for (int i = 0; i < transform.childCount; i++)
@@ -287,6 +289,8 @@ public class ImageTargetController : MonoBehaviour
             } else {
                 sensor_details.text = "Error while getting data from server";
             }
+
+            readyGetNewData = true;
         });
     }
 
@@ -294,9 +298,9 @@ public class ImageTargetController : MonoBehaviour
         string appTimeRecord = PlayerPrefs.GetString("app__time_record");
 
         if (appTimeRecord == "True") {
-            PlayerPrefs.SetString("app__go_time_record", "False");
+            PlayerPrefs.SetString("app__end_time_record", "False");
         } else {
-            PlayerPrefs.SetString("app__go_time_record", "True");
+            PlayerPrefs.SetString("app__end_time_record", "True");
         }
 
         Debug.Log(appTimeRecord);
@@ -311,7 +315,7 @@ public class ImageTargetController : MonoBehaviour
         string goTimeRecord = PlayerPrefs.GetString("app__go_time_record");
         string endTimeRecord = PlayerPrefs.GetString("app__end_time_record");
 
-        // Debug.Log(goTimeRecord + " " + endTimeRecord);
+        Debug.Log("APP: " + appTimeRecord + "GO: " + goTimeRecord + "END: " + endTimeRecord);
 
 // my code
             
@@ -322,18 +326,28 @@ public class ImageTargetController : MonoBehaviour
             PlayerPrefs.SetString("app__time_record", "False");
         }
 
+        if (appTimeRecord == "False" && goTimeRecord == "False") {
+            Debug.Log("update end time record");
+            PlayerPrefs.SetString("app__end_time_record", "True");
+        }
+
 // dev code
         if (goTimeRecord == "True" || endTimeRecord == "True") {
 
-            if (restartTime > 0) {
-                restartTime--;
-                // Debug.Log(restartTime);
-            } else {
-                restartTime = 50;
-                SetIoTData();
+            // Debug.Log(readyGetNewData + " " + restartTime);
+
+            if (readyGetNewData == true) {
+                if (restartTime > 0) {
+                    restartTime--;
+                    // Debug.Log(restartTime);
+                } else {
+                    restartTime = 50;
+                    readyGetNewData = false;
+                    SetIoTData();
+                }
             }
 
-            // Debug.Log("[EasyAR] OnTracking targtet name: " + target.name());
+            Debug.Log("[EasyAR] OnTracking target name: " + target.name());
             easyar.Utility.SetMatrixOnTransform(transform, pose);
             if (xFlip)
             {

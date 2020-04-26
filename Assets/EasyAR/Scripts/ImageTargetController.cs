@@ -83,7 +83,7 @@ public class ImageTargetController : MonoBehaviour
         Debug.Log("Back to Main menu");
     }
 
-    async private void scanQrButtonClick () {
+    private void scanQrButtonClick () {
         Debug.Log("Go to Scan QR");
         // var objects = GameObject.FindObjectsOfType(GameObject);
         // foreach (GameObject o in objects) {
@@ -299,14 +299,15 @@ public class ImageTargetController : MonoBehaviour
 
         if (appTimeRecord == "True") {
             PlayerPrefs.SetString("app__end_time_record", "False");
+            PlayerPrefs.SetString("app__go_time_record", "False");
         } else {
-            PlayerPrefs.SetString("app__end_time_record", "True");
+            // PlayerPrefs.SetString("app__end_time_record", "True");
         }
 
-        Debug.Log(appTimeRecord);
+        // Debug.Log(appTimeRecord);
 
-        string goTimeRecord = PlayerPrefs.GetString("app__go_time_record");
-        Debug.Log(goTimeRecord);
+        // string goTimeRecord = PlayerPrefs.GetString("app__go_time_record");
+        // Debug.Log(goTimeRecord);
     }
 
     public void OnTracking(Matrix4x4 pose)
@@ -315,25 +316,25 @@ public class ImageTargetController : MonoBehaviour
         string goTimeRecord = PlayerPrefs.GetString("app__go_time_record");
         string endTimeRecord = PlayerPrefs.GetString("app__end_time_record");
 
-        Debug.Log("APP: " + appTimeRecord + "GO: " + goTimeRecord + "END: " + endTimeRecord);
+        // Debug.Log("APP: " + appTimeRecord + "GO: " + goTimeRecord + "END: " + endTimeRecord);
 
 // my code
             
         if (appTimeRecord == "True" && goTimeRecord == "True") {
-            this.OnFound();
             PlayerPrefs.SetString("app__go_time_record", "False");
             PlayerPrefs.SetString("app__end_time_record", "True");
             PlayerPrefs.SetString("app__time_record", "False");
+            this.OnFound();
         }
 
-        if (appTimeRecord == "False" && goTimeRecord == "False") {
-            Debug.Log("update end time record");
-            PlayerPrefs.SetString("app__end_time_record", "True");
-        }
+        // if (appTimeRecord == "False" && goTimeRecord == "False") {
+        //     Debug.Log("update end time record");
+        //     PlayerPrefs.SetString("app__end_time_record", "True");
+        // }
 
 // dev code
-        if (goTimeRecord == "True" || endTimeRecord == "True") {
-
+        // if (goTimeRecord == "True" || endTimeRecord == "True") {
+        if (appTimeRecord != "True") {
             // Debug.Log(readyGetNewData + " " + restartTime);
 
             if (readyGetNewData == true) {
@@ -379,10 +380,12 @@ public class ImageTargetController : MonoBehaviour
     public void OnFound()
     {
 // my code 
+        string appTimeRecord = PlayerPrefs.GetString("app__time_record");
         string goTimeRecord = PlayerPrefs.GetString("app__go_time_record");
         string endTimeRecord = PlayerPrefs.GetString("app__end_time_record");
 
-        if (goTimeRecord == "True" || endTimeRecord == "True") {
+        // if (goTimeRecord == "True" || endTimeRecord == "True") {
+        if (appTimeRecord != "True") {
             device_name.text = "";
             sensor_details.text = "Please wait ...";
 

@@ -41,7 +41,7 @@ public class EasyArImageTargetScript : MonoBehaviour
             timeRecordText.text = "Your time: " + myTime.ToString() + " s";
         }
 
-        if (endTimeRecord == "True") {
+        if (goTimeRecord == "False" && endTimeRecord == "True") {
             timeRecordPanel.SetActive(true);
         }
         

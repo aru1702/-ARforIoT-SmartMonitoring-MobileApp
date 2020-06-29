@@ -66,6 +66,8 @@ namespace easyar
 
         public CameraImageRenderer CameraBackgroundRenderer;
 
+        private bool cameraOn;
+
         private void Awake()
         {
             easyar.CameraDevice.requestPermissions(EasyARBehaviour.Scheduler, (System.Action<PermissionStatus, string>)((status, msg) =>
@@ -81,6 +83,8 @@ namespace easyar
         void Init()
         {
             initialized = true;
+            
+            cameraOn = false;
 
             iFrameThrottler = InputFrameThrottler.create();
             oFrameBuffer = OutputFrameBuffer.create();
@@ -168,7 +172,9 @@ namespace easyar
             }
 
             var oFrame = oFrameBuffer.peek();
-            if (!oFrame.OnSome) { Debug.Log("[EasyAR] oframe is null"); return; }
+            if (!oFrame.OnSome) { Debug.Log("[EasyAR] oframe is null"); return; } 
+            else { CameraOn(); }
+            
             var iFrame = oFrame.Value.inputFrame();
             if (iFrame == null) { oFrame.Value.Dispose(); Debug.Log("[EasyAR] iFrame is null"); return; }
 
@@ -258,6 +264,15 @@ namespace easyar
             easyarCamera.setSize(new Vec2I((int)CameraSize.x, (int)CameraSize.y));
             easyarCamera.start();
             easyarCamera.inputFrameSource().connect(iFrameThrottler.input());
+        }
+
+        private void CameraOn () {
+            if (!cameraOn) {
+                Debug.Log("[EasyAR] camera is ready!");
+                if (PlayerPrefs.GetString("app__time_record") == "True")
+                    PlayerPrefs.SetString("app__go_time_record", "True");
+                cameraOn = true;
+            }
         }
     }
 }

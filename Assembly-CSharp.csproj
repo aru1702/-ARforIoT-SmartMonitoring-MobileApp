@@ -92,6 +92,7 @@
      <Compile Include="Assets\Scripts\alertPanelScript.cs" />
      <Compile Include="Assets\Scripts\animationLoading.cs" />
      <Compile Include="Assets\Scripts\countdownPanelScript.cs" />
+     <Compile Include="Assets\Scripts\CountDownSceneScript.cs" />
      <Compile Include="Assets\Scripts\EasyArImageTargetScript.cs" />
      <Compile Include="Assets\Scripts\EmptySceneScript.cs" />
      <Compile Include="Assets\Scripts\External\WizUtils\Logger\Log.cs" />

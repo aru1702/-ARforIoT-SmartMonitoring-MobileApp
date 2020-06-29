@@ -237,6 +237,14 @@ public class ImageTargetController : MonoBehaviour
         // try to get data from pref        
         string deviceId = PlayerPrefs.GetString("device__id");
 
+        // check if device id is exists
+        if (deviceId == null || deviceId == "") {
+            device_name.text = "No device";
+            device_lastupdate.text = "";
+            sensor_details.text = "Please scan your device\nQR code first!";
+            return;
+        }
+
         // url for RestClient API
         string getDeviceDetailUrl = "https://myionic-c4817.firebaseapp.com/api/v1/Device/GetDevice/" + deviceId;
         string getAllSensorDataUrl = "https://myionic-c4817.firebaseapp.com/api/v1/Data/GetAll/" + deviceId;
@@ -299,7 +307,7 @@ public class ImageTargetController : MonoBehaviour
 
         if (appTimeRecord == "True") {
             PlayerPrefs.SetString("app__end_time_record", "False");
-            PlayerPrefs.SetString("app__go_time_record", "False");
+            // PlayerPrefs.SetString("app__go_time_record", "False");
         } else {
             // PlayerPrefs.SetString("app__end_time_record", "True");
         }
@@ -316,7 +324,7 @@ public class ImageTargetController : MonoBehaviour
         string goTimeRecord = PlayerPrefs.GetString("app__go_time_record");
         string endTimeRecord = PlayerPrefs.GetString("app__end_time_record");
 
-        // Debug.Log("APP: " + appTimeRecord + "GO: " + goTimeRecord + "END: " + endTimeRecord);
+        Debug.Log("APP: " + appTimeRecord + "\tGO: " + goTimeRecord + "\tEND: " + endTimeRecord);
 
 // my code
             

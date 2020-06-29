@@ -24,8 +24,10 @@ public class MainMenuScript : MonoBehaviour
         // Debug.Log(PlayerPrefs.GetString("app__time_record"));
         if (PlayerPrefs.GetString("app__time_record") == "True") {
             timeRecord.GetComponent<Toggle>().isOn = true;
+            timeRecordV = true;
         } else {
             timeRecord.GetComponent<Toggle>().isOn = false;
+            timeRecordV = false;
         }
     }
 
@@ -66,7 +68,13 @@ public class MainMenuScript : MonoBehaviour
 
     private void GoToMonitoring () {
         Debug.Log("To monitoring");
-        SceneManager.LoadScene(3);
+        // SceneManager.LoadScene(3);
+
+        if (timeRecordV) {
+            SceneManager.LoadScene(6);
+        } else {
+            SceneManager.LoadScene(3);
+        }
     }
 
     private void GoToProfile () {

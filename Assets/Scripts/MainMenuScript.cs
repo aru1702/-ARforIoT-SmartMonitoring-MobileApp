@@ -12,7 +12,7 @@ public class MainMenuScript : MonoBehaviour
 {
 
     public Toggle timeRecord;
-    public Button toMonitoring, toProfile, toQuit, logoutButton;
+    public Button toMonitoring, toProfile, toQuit, logoutButton, toDataRecord;
     public Button yesLogout, noLogout;
     public Text userName, userEmail, user_Id, alertText;
     public GameObject loadingPanel, logoutPanel, alertPanel;
@@ -60,10 +60,15 @@ public class MainMenuScript : MonoBehaviour
         toMonitoring.onClick.AddListener(GoToMonitoring);
         toProfile.onClick.AddListener(GoToProfile);
         toQuit.onClick.AddListener(GoToQuit);
+        toDataRecord.onClick.AddListener(GoToDataRecord);
         
         logoutButton.onClick.AddListener(ConfirmLogoutButton);
         yesLogout.onClick.AddListener(GoLogoutYes);
         noLogout.onClick.AddListener(GoLogoutNo);
+    }
+
+    private void GoToDataRecord () {
+        
     }
 
     private void GoToMonitoring () {

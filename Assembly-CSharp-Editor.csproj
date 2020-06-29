@@ -47,6 +47,8 @@
   <ItemGroup>
      <Compile Include="Assets\Editor\ParserTest.cs" />
      <Compile Include="Assets\Editor\ScannerTest.cs" />
+     <Compile Include="Assets\Simple-Database\Testing\Editor\JsonConvertersTest.cs" />
+     <Compile Include="Assets\Simple-Database\Testing\Editor\SaveFileTest.cs" />
  <Reference Include="UnityEditor.TestRunner">
  <HintPath>C:/Users/MAldyB/UnityProject/SmartAR-IoT/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
  </Reference>
@@ -277,6 +279,12 @@
  </Reference>
  <Reference Include="zxing.unity">
  <HintPath>C:/Users/MAldyB/UnityProject/SmartAR-IoT/Assets/Scripts/zxing.unity.dll</HintPath>
+ </Reference>
+ <Reference Include="BplusDotNet">
+ <HintPath>C:/Users/MAldyB/UnityProject/SmartAR-IoT/Assets/Simple-Database/Core/Third party/BplusDotNet/BplusDotNet.dll</HintPath>
+ </Reference>
+ <Reference Include="Newtonsoft.Json">
+ <HintPath>C:/Users/MAldyB/UnityProject/SmartAR-IoT/Assets/Simple-Database/Core/Third party/Json.Net.Unity3D/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="nunit.framework">
  <HintPath>C:/Users/MAldyB/UnityProject/SmartAR-IoT/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>

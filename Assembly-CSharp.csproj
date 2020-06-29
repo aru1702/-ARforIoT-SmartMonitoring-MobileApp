@@ -93,6 +93,7 @@
      <Compile Include="Assets\Scripts\animationLoading.cs" />
      <Compile Include="Assets\Scripts\countdownPanelScript.cs" />
      <Compile Include="Assets\Scripts\CountDownSceneScript.cs" />
+     <Compile Include="Assets\Scripts\DataPanelScript.cs" />
      <Compile Include="Assets\Scripts\EasyArImageTargetScript.cs" />
      <Compile Include="Assets\Scripts\EmptySceneScript.cs" />
      <Compile Include="Assets\Scripts\External\WizUtils\Logger\Log.cs" />
@@ -111,7 +112,6 @@
      <Compile Include="Assets\Scripts\Models\LoginModel.cs" />
      <Compile Include="Assets\Scripts\Models\LoginModelRes.cs" />
      <Compile Include="Assets\Scripts\Models\LogoutPostModel.cs" />
-     <Compile Include="Assets\Scripts\Multi-dimen Script\MDLoginScript.cs" />
      <Compile Include="Assets\Scripts\Parser\ParserResult.cs" />
      <Compile Include="Assets\Scripts\Parser\ZXingParser.cs" />
      <Compile Include="Assets\Scripts\Scanner\Scanner.cs" />
@@ -120,11 +120,18 @@
      <Compile Include="Assets\Scripts\Settings\ScannerSettings.cs" />
      <Compile Include="Assets\Scripts\SplashScreenScript.cs" />
      <Compile Include="Assets\Scripts\Webcam\UnityWebcam.cs" />
+     <Compile Include="Assets\Simple-Database\Core\Skytanet.SimpleDatabase\SaveFile.cs" />
+     <Compile Include="Assets\Simple-Database\Demo Scenes\Scripts\ButtonScript.cs" />
+     <Compile Include="Assets\Simple-Database\Demo Scenes\Scripts\DbModel.cs" />
+     <Compile Include="Assets\Simple-Database\Demo Scenes\Scripts\DbSaveData.cs" />
+     <Compile Include="Assets\Simple-Database\Demo Scenes\Scripts\SaveFileManager.cs" />
+     <Compile Include="Assets\Simple-Database\Testing\SimpleTestObject.cs" />
      <None Include="Assets\EasyAR\doc\readme.cn.txt" />
      <None Include="Assets\EasyAR\Shaders\yuv_nv21.shader" />
      <None Include="Assets\EasyAR\Shaders\yuv_i420_yv12.shader" />
      <None Include="Assets\EasyAR\Shaders\gray.shader" />
      <None Include="Assets\EasyAR\doc\changelog.cn.txt" />
+     <None Include="Assets\Simple-Database\Third-party notices.txt" />
      <None Include="Assets\EasyAR\Shaders\bgr.shader" />
      <None Include="Assets\EasyAR\doc\readme.en.txt" />
      <None Include="Assets\notes.txt" />
@@ -336,6 +343,12 @@
  </Reference>
  <Reference Include="zxing.unity">
  <HintPath>C:/Users/MAldyB/UnityProject/SmartAR-IoT/Assets/Scripts/zxing.unity.dll</HintPath>
+ </Reference>
+ <Reference Include="BplusDotNet">
+ <HintPath>C:/Users/MAldyB/UnityProject/SmartAR-IoT/Assets/Simple-Database/Core/Third party/BplusDotNet/BplusDotNet.dll</HintPath>
+ </Reference>
+ <Reference Include="Newtonsoft.Json">
+ <HintPath>C:/Users/MAldyB/UnityProject/SmartAR-IoT/Assets/Simple-Database/Core/Third party/Json.Net.Unity3D/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.15f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

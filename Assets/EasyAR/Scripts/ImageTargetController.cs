@@ -23,7 +23,7 @@ using System.Runtime.InteropServices;
 public class ImageTargetController : MonoBehaviour
 {
 
-    public Button backButton, scanQrButton;
+    public Button backButton, scanQrButton, retryButton;
     private int restartTime;
     private TextMesh device_name, sensor_details, device_lastupdate;
     private bool readyGetNewData;
@@ -99,12 +99,22 @@ public class ImageTargetController : MonoBehaviour
         SceneManager.LoadScene(5);
     }
 
+    private void retryButtonClick () {
+        PlayerPrefs.SetString("app__go_time_record", "False");
+        PlayerPrefs.SetString("app__end_time_record", "False");
+        PlayerPrefs.SetString("app__time_record", "True");
+        SceneManager.LoadScene(3);
+        this.OnDestroy();
+    }
+
     private void Start()
     {
 
 // my code
         backButton.onClick.AddListener(backButtonClick);
         scanQrButton.onClick.AddListener(scanQrButtonClick);
+        retryButton.onClick.AddListener(retryButtonClick);
+        retryButton.interactable = false;
         restartTime = 50;
         device_name = GameObject.Find("device_name").GetComponent<TextMesh>();
         sensor_details = GameObject.Find("sensor_details").GetComponent<TextMesh>();

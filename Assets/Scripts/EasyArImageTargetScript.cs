@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class EasyArImageTargetScript : MonoBehaviour
 {
 
-    public Button alertPanelButton, resetIdButton;
+    public Button alertPanelButton, resetIdButton, retryButton;
     public GameObject alertPanel, countdownPanel, timeRecordPanel;
     public Text timeRecordText;
     private float myTime;
@@ -25,8 +25,12 @@ public class EasyArImageTargetScript : MonoBehaviour
         if (recordTime == "True")
             timeRecordPanel.SetActive(true);
 
-        if (PlayerPrefs.GetString("device__id") != "" || PlayerPrefs.GetString("device__id") != null) 
+        // Debug.Log("ID: " + PlayerPrefs.GetString("device__id"));
+
+        if (PlayerPrefs.GetString("device__id") != "") 
             resetIdButton.interactable = true;
+        else
+            resetIdButton.interactable = false;
     }
 
     public void Start () {
@@ -57,10 +61,11 @@ public class EasyArImageTargetScript : MonoBehaviour
             timeRecordText.text = "Your time: " + myTime.ToString() + " s";
         }
 
-        // if (goTimeRecord == "False" && endTimeRecord == "True") {
-        //     timeRecordText.text = "Your time: " + myTime.ToString() + " s";
-        //     timeRecordPanel.SetActive(true);
-        // }
+        if (goTimeRecord == "False" && endTimeRecord == "True") {
+            // timeRecordText.text = "Your time: " + myTime.ToString() + " s";
+            // timeRecordPanel.SetActive(true);
+            retryButton.interactable = true;
+        }
         
         // Debug.Log(goTimeRecord + " " + endTimeRecord);
     }

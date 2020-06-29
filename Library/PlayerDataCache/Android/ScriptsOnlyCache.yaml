@@ -2,6 +2,7 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - ContinuousDemo
+    - CountDownSceneScript
     - EasyArImageTargetScript
     - EmptySceneScript
     - ImageTargetController
@@ -33,6 +34,57 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Text
     - UnityEngine.UI.Toggle
   sceneClasses:
+    Assets/Scenes/CountDown.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 9700}
+    - Class: 114
+      Script: {instanceID: 9860}
+    - Class: 114
+      Script: {instanceID: 9902}
+    - Class: 114
+      Script: {instanceID: 10096}
+    - Class: 114
+      Script: {instanceID: 10222}
+    - Class: 114
+      Script: {instanceID: 10300}
+    - Class: 114
+      Script: {instanceID: 10682}
+    - Class: 114
+      Script: {instanceID: 11166}
+    - Class: 114
+      Script: {instanceID: 11536}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
     Assets/Scenes/EasyArImageTarget.unity:
     - Class: 1
       Script: {instanceID: 0}
@@ -77,23 +129,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10096}
     - Class: 114
-      Script: {instanceID: 10298}
+      Script: {instanceID: 10300}
     - Class: 114
-      Script: {instanceID: 10360}
+      Script: {instanceID: 10362}
     - Class: 114
-      Script: {instanceID: 10680}
+      Script: {instanceID: 10682}
     - Class: 114
-      Script: {instanceID: 10728}
+      Script: {instanceID: 10730}
     - Class: 114
-      Script: {instanceID: 10742}
+      Script: {instanceID: 10744}
     - Class: 114
-      Script: {instanceID: 11094}
+      Script: {instanceID: 11096}
     - Class: 114
-      Script: {instanceID: 11164}
+      Script: {instanceID: 11166}
     - Class: 114
-      Script: {instanceID: 11192}
+      Script: {instanceID: 11194}
     - Class: 114
-      Script: {instanceID: 11534}
+      Script: {instanceID: 11536}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -140,17 +192,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10206}
     - Class: 114
-      Script: {instanceID: 10298}
+      Script: {instanceID: 10300}
     - Class: 114
-      Script: {instanceID: 10680}
+      Script: {instanceID: 10682}
     - Class: 114
-      Script: {instanceID: 10884}
+      Script: {instanceID: 10886}
     - Class: 114
-      Script: {instanceID: 11164}
+      Script: {instanceID: 11166}
     - Class: 114
-      Script: {instanceID: 11288}
+      Script: {instanceID: 11290}
     - Class: 114
-      Script: {instanceID: 11534}
+      Script: {instanceID: 11536}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -197,17 +249,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10168}
     - Class: 114
-      Script: {instanceID: 10298}
+      Script: {instanceID: 10300}
     - Class: 114
-      Script: {instanceID: 10680}
+      Script: {instanceID: 10682}
     - Class: 114
-      Script: {instanceID: 11164}
+      Script: {instanceID: 11166}
     - Class: 114
-      Script: {instanceID: 11288}
+      Script: {instanceID: 11290}
     - Class: 114
-      Script: {instanceID: 11534}
+      Script: {instanceID: 11536}
     - Class: 114
-      Script: {instanceID: 11548}
+      Script: {instanceID: 11550}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -250,19 +302,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9902}
     - Class: 114
-      Script: {instanceID: 10298}
+      Script: {instanceID: 10300}
     - Class: 114
-      Script: {instanceID: 10680}
+      Script: {instanceID: 10682}
     - Class: 114
-      Script: {instanceID: 10702}
+      Script: {instanceID: 10704}
     - Class: 114
-      Script: {instanceID: 10764}
+      Script: {instanceID: 10766}
     - Class: 114
-      Script: {instanceID: 10850}
+      Script: {instanceID: 10852}
     - Class: 114
-      Script: {instanceID: 11164}
+      Script: {instanceID: 11166}
     - Class: 114
-      Script: {instanceID: 11534}
+      Script: {instanceID: 11536}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -307,15 +359,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9902}
     - Class: 114
-      Script: {instanceID: 10298}
+      Script: {instanceID: 10300}
     - Class: 114
-      Script: {instanceID: 10894}
+      Script: {instanceID: 10896}
     - Class: 114
-      Script: {instanceID: 10906}
+      Script: {instanceID: 10908}
     - Class: 114
-      Script: {instanceID: 11164}
+      Script: {instanceID: 11166}
     - Class: 114
-      Script: {instanceID: 11534}
+      Script: {instanceID: 11536}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -358,11 +410,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9902}
     - Class: 114
-      Script: {instanceID: 10298}
+      Script: {instanceID: 10300}
     - Class: 114
-      Script: {instanceID: 11164}
+      Script: {instanceID: 11166}
     - Class: 114
-      Script: {instanceID: 11534}
+      Script: {instanceID: 11536}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -596,6 +648,12 @@ ScriptsOnlyBuild:
     className: Mask
   - hash:
       serializedVersion: 2
+      Hash: 1925c795dcde0bf094896e0f87889ff3
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CountDownSceneScript
+  - hash:
+      serializedVersion: 2
       Hash: caa533b001ae39b864ba8425019e2268
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -704,7 +762,7 @@ ScriptsOnlyBuild:
     className: ImageTrackerBehaviour
   - hash:
       serializedVersion: 2
-      Hash: 2a805437451fa5344b2d763dc7ae46b2
+      Hash: d5dd127a00e1a70ec7e8ae3e4dd2192a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EasyArImageTargetScript
@@ -788,7 +846,7 @@ ScriptsOnlyBuild:
     className: TimelineAsset
   - hash:
       serializedVersion: 2
-      Hash: 236f6114184762c6059e2bd1632c0573
+      Hash: 74f78f4d91d36718a049fe4f2a9e1ad8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ImageTargetController
@@ -956,4 +1014,5 @@ ScriptsOnlyBuild:
   - Assets/Scenes/EasyArImageTarget.unity
   - Assets/Scenes/ScanQrCode.unity
   - Assets/Scenes/TransitionScene.unity
-  playerPath: C:/Users/MAldyB/UnityProject/SmartARIoT.apk
+  - Assets/Scenes/CountDown.unity
+  playerPath: C:/Users/MAldyB/UnityProject/SmartARIoT.014.apk

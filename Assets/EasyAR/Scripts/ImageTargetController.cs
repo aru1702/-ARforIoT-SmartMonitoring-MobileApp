@@ -7,11 +7,12 @@
 //================================================================================================================================
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+
 using Models;
 using Proyecto26;
 
@@ -114,8 +115,10 @@ public class ImageTargetController : MonoBehaviour
         backButton.onClick.AddListener(backButtonClick);
         scanQrButton.onClick.AddListener(scanQrButtonClick);
         retryButton.onClick.AddListener(retryButtonClick);
+        
         retryButton.interactable = false;
         restartTime = 50;
+        
         device_name = GameObject.Find("device_name").GetComponent<TextMesh>();
         sensor_details = GameObject.Find("sensor_details").GetComponent<TextMesh>();
         device_lastupdate = GameObject.Find("device_lastupdate").GetComponent<TextMesh>();
@@ -139,6 +142,22 @@ public class ImageTargetController : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    private void OnEnable() {
+        string appTimeRecord = PlayerPrefs.GetString("app__time_record");
+
+        if (appTimeRecord == "True") {
+            PlayerPrefs.SetString("app__end_time_record", "False");
+            // PlayerPrefs.SetString("app__go_time_record", "False");
+        } else {
+            // PlayerPrefs.SetString("app__end_time_record", "True");
+        }
+
+        // Debug.Log(appTimeRecord);
+
+        // string goTimeRecord = PlayerPrefs.GetString("app__go_time_record");
+        // Debug.Log(goTimeRecord);
     }
 
     private IEnumerator LoadImageTarget()
@@ -310,22 +329,6 @@ public class ImageTargetController : MonoBehaviour
 
             readyGetNewData = true;
         });
-    }
-
-    private void OnEnable() {
-        string appTimeRecord = PlayerPrefs.GetString("app__time_record");
-
-        if (appTimeRecord == "True") {
-            PlayerPrefs.SetString("app__end_time_record", "False");
-            // PlayerPrefs.SetString("app__go_time_record", "False");
-        } else {
-            // PlayerPrefs.SetString("app__end_time_record", "True");
-        }
-
-        // Debug.Log(appTimeRecord);
-
-        // string goTimeRecord = PlayerPrefs.GetString("app__go_time_record");
-        // Debug.Log(goTimeRecord);
     }
 
     public void OnTracking(Matrix4x4 pose)

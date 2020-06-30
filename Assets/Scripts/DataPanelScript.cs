@@ -95,11 +95,19 @@ public class DataPanelScript : MonoBehaviour
     /// </summary>
     void OnEnable()
     {
-        // if (saveFile.IsOpen())
-        //     saveFile.Close();
-
-        saveFile = new SaveFile(DB_NAME);
-        RefreshData();
+        try
+        {
+            saveFile.Close();
+            saveFile = new SaveFile(DB_NAME);  
+            RefreshData();
+        }
+        catch (System.Exception)
+        {
+            Debug.Log("failed");
+            saveFile = new SaveFile(DB_NAME);
+            RefreshData();
+            throw;
+        }
     }
 
     void RefreshData () {
@@ -188,21 +196,20 @@ public class DataPanelScript : MonoBehaviour
         try
         {
             StreamWriter sw = new StreamWriter( Application.persistentDataPath + " " + localDate.ToString("yyyy-MM-dd HH-mm-ss") + ".txt" );
-            sw.WriteLine( "Num.\tValue saved" );
 
             List<string> keys = saveFile.GetKeys();
             for (int i = 0 ; i < keys.Count ; i++) {
                 string myKey = keys[i];
                 string myValue = saveFile.Get<string>(keys[i]);
-                sw.WriteLine( myKey + "\t" + myValue );
+                sw.WriteLine( myValue );
             }
 
             sw.Close();
-            alertText.text = "Success!";
+            alertText.text = "Saved data into text success!";
         }
         catch (System.Exception)
         {
-            alertText.text = "Failed!";
+            alertText.text = "Failed to save data!";
             throw;
         }
 
